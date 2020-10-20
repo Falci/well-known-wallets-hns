@@ -1,0 +1,13 @@
+{
+  "name": "well-known-wallets-hns",
+  "version": "1.0.1",
+  "main": "lib.js",
+  "license": "MIT",
+  "author": {
+    "name": "Fernando Falci",
+    "url": "https://falci.me"
+  },
+  "dependencies": {
+    "hdns": "^0.7.0"
+  }
+}
