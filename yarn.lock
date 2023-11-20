@@ -2,19 +2,18 @@
 # yarn lockfile v1
 
 
-bcrypto@~5.0.0:
-  version "5.0.4"
-  resolved "https://registry.yarnpkg.com/bcrypto/-/bcrypto-5.0.4.tgz#711a67450f131fcb517824a4d496ccb83fa96fc9"
-  integrity sha512-5vNoWRFU7cJ3hjhL2O/1Q1U/L/+e2+eDkjUChRAolfrVyeyZcwV3qTTQYn+XA1eUzrZbSZaaH5ZtvJOTwUPh6A==
+bcrypto@~5.4.0:
+  version "5.4.0"
+  resolved "https://registry.yarnpkg.com/bcrypto/-/bcrypto-5.4.0.tgz#4046f0c44a4b301eff84de593b4f86fce8d91db2"
+  integrity sha512-KDX2CR29o6ZoqpQndcCxFZAtYA1jDMnXU3jmCfzP44g++Cu7AHHtZN/JbrN/MXAg9SLvtQ8XISG+eVD9zH1+Jg==
   dependencies:
-    bufio "~1.0.6"
-    loady "~0.0.1"
-    nan "^2.14.0"
+    bufio "~1.0.7"
+    loady "~0.0.5"
 
-bfile@~0.2.1:
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/bfile/-/bfile-0.2.2.tgz#b0c205cee1ff22a9525304ec51f09195a7afa077"
-  integrity sha512-X205SsJ7zFAnjeJ/pBLqDqF10x/4Su3pBy8UdVKw4hdGJk7t5pLoRi+uG4rPaDAClGbrEfT/06PGUbYiMYKzTg==
+bfile@~0.2.2:
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/bfile/-/bfile-0.2.3.tgz#13e555e941b78f657d55baa96b966228a125b835"
+  integrity sha512-BhbmCLqDC+u8rPSeB/I8bRC8luQoUt+wD326CECXYXtE5GyTWL/q/OkNp58aH7XEREguEItvqM18s9vXLvg6fw==
 
 bheep@~0.1.5:
   version "0.1.5"
@@ -23,35 +22,42 @@ bheep@~0.1.5:
   dependencies:
     bsert "~0.0.10"
 
-binet@~0.3.5:
-  version "0.3.6"
-  resolved "https://registry.yarnpkg.com/binet/-/binet-0.3.6.tgz#82d9462fa601759956a1f1f1f0f10a5760445f85"
-  integrity sha512-6pm+Gc3uNiiJZEv0k8JDWqQlo9ki/o9UNAkLmr0EGm7hI5MboOJVIOlO1nw3YuDkLHWN78OPsaC4JhRkn2jMLw==
+binet@~0.3.6, binet@~0.3.7:
+  version "0.3.9"
+  resolved "https://registry.yarnpkg.com/binet/-/binet-0.3.9.tgz#614383d5bb923f02cddc596a5947bdc68b85efbc"
+  integrity sha512-htptPuT5YTTRThIQAuWyCo+rIvXwAC+CrUq40ldhKHBPbZoMb76SBkI8NtvLkWussJr+lnR5Mc0rh1dpNBrBPg==
   dependencies:
-    bs32 "~0.1.5"
-    bsert "~0.0.10"
+    bs32 "~0.1.7"
+    bsert "~0.0.12"
 
-bns@~0.10.0:
-  version "0.10.3"
-  resolved "https://registry.yarnpkg.com/bns/-/bns-0.10.3.tgz#33d7a9e6982186d60cafdf869ed9d52fe9caa070"
-  integrity sha512-uk0aXOZQ2b2GfR9crCZ19IktBANK038/P5ZhYuS6Qruju8HXyuOvv9NO4JBHE2CG1nIyORk7MqBLolBK8uEvjw==
+bns@~0.15.0:
+  version "0.15.0"
+  resolved "https://registry.yarnpkg.com/bns/-/bns-0.15.0.tgz#147d0f20702c699af5ced0199c8691a4c1d43ffb"
+  integrity sha512-iJWQVE399vQzPfhalFMJGEQ7k5Ot2D6Mz8dkoPeLO8huWAMOiJNJ1tHzOu5j+ZyNNew6ITgG/LsSyaRPxvkXuw==
   dependencies:
-    bcrypto "~5.0.0"
-    bfile "~0.2.1"
+    bcrypto "~5.4.0"
+    bfile "~0.2.2"
     bheep "~0.1.5"
-    binet "~0.3.5"
+    binet "~0.3.6"
     bs32 "~0.1.6"
     bsert "~0.0.10"
     btcp "~0.1.5"
     budp "~0.1.6"
-    bufio "~1.0.6"
+    bufio "~1.0.7"
   optionalDependencies:
-    unbound "~0.3.5"
+    unbound "~0.4.3"
 
-bs32@~0.1.5, bs32@~0.1.6:
+bs32@~0.1.6:
   version "0.1.6"
   resolved "https://registry.yarnpkg.com/bs32/-/bs32-0.1.6.tgz#2710cb70da3f55447138181fa645e2c54b1ef6d0"
   integrity sha512-usjDesQqZ8ihHXOnOEQuAdymBHnJEfSd+aELFSg1jN/V3iAf12HrylHlRJwIt6DTMmXpBDQ+YBg3Q3DIYdhRgQ==
+  dependencies:
+    bsert "~0.0.10"
+
+bs32@~0.1.7:
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/bs32/-/bs32-0.1.7.tgz#b273980b708995e94e6d8f03e1d17ec8e2583a58"
+  integrity sha512-I0aKZCBneFTkcVNUIALzsOevqPIF93ynGPX6wj6pXmIBpXVGCqTgdvMx2QyR/NwgOIqMLH++Ovyum28abVG6QA==
   dependencies:
     bsert "~0.0.10"
 
@@ -59,6 +65,11 @@ bsert@~0.0.10:
   version "0.0.10"
   resolved "https://registry.yarnpkg.com/bsert/-/bsert-0.0.10.tgz#231ac82873a1418c6ade301ab5cd9ae385895597"
   integrity sha512-NHNwlac+WPy4t2LoNh8pXk8uaIGH3NSaIUbTTRXGpE2WEbq0te/tDykYHkFK57YKLPjv/aGHmbqvnGeVWDz57Q==
+
+bsert@~0.0.12:
+  version "0.0.12"
+  resolved "https://registry.yarnpkg.com/bsert/-/bsert-0.0.12.tgz#157c6a6beb1548af3b14d484fcd2a78eb440599d"
+  integrity sha512-lUB0EMu4KhIf+VQ6RZJ7J3dFdohYSeta+gNgDi00Hi/t3k/W6xZlwm9PSSG0q7hJ2zW9Rsn5yaMPymETxroTRw==
 
 btcp@~0.1.5:
   version "0.1.5"
@@ -70,33 +81,27 @@ budp@~0.1.6:
   resolved "https://registry.yarnpkg.com/budp/-/budp-0.1.6.tgz#bbe166cc4842cf8d96754ee29afb1af56f6757c8"
   integrity sha512-o+a8NPq3DhV91j4nInjht2md6mbU1XL+7ciPltP66rw5uD3KP1m5r8lA94LZVaPKcFdJ0l2HVVzRNxnY26Pefg==
 
-bufio@~1.0.6:
+bufio@~1.0.7:
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/bufio/-/bufio-1.0.7.tgz#b7f63a1369a0829ed64cc14edf0573b3e382a33e"
   integrity sha512-bd1dDQhiC+bEbEfg56IdBv7faWa6OipMs/AFFFvtFnB3wAYjlwQpQRZ0pm6ZkgtfL0pILRXhKxOiQj6UzoMR7A==
 
-hdns@^0.7.0:
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/hdns/-/hdns-0.7.0.tgz#7d3cfa4dff7f46f2ee63e13a5f24f3c2d56ee5a6"
-  integrity sha512-WLibYJujqFfRaH+nM+JWSY9o3DLxWC5EFP3IQbRl6s8+GwutFaKvz60U/1V7ceaHENhSxAwr684J85HNKmDXjg==
+hdns@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/hdns/-/hdns-0.8.0.tgz#9349142e26f1fd7d629b0ddb9951f2deb83e349c"
+  integrity sha512-kgxcGNE9jvC/5+6RTSQFsoYzYG7VFF3FNQwe5ZxCOxlcLPtWPaGeZ8Yq2fAme7scQ8FC0mxgq7MNxgBf/Z5gWw==
   dependencies:
-    binet "~0.3.5"
-    bns "~0.10.0"
+    binet "~0.3.7"
+    bns "~0.15.0"
 
-loady@~0.0.1:
+loady@~0.0.5:
   version "0.0.5"
   resolved "https://registry.yarnpkg.com/loady/-/loady-0.0.5.tgz#b17adb52d2fb7e743f107b0928ba0b591da5d881"
   integrity sha512-uxKD2HIj042/HBx77NBcmEPsD+hxCgAtjEWlYNScuUjIsh/62Uyu39GOR68TBR68v+jqDL9zfftCWoUo4y03sQ==
 
-nan@^2.13.1, nan@^2.14.0:
-  version "2.14.2"
-  resolved "https://registry.yarnpkg.com/nan/-/nan-2.14.2.tgz#f5376400695168f4cc694ac9393d0c9585eeea19"
-  integrity sha512-M2ufzIiINKCuDfBSAUr1vWQ+vuVcA9kqx8JJUsbQi6yf1uGRyb7HfpdfUr5qLXf3B/t8dPvcjhKMmlfnP47EzQ==
-
-unbound@~0.3.5:
-  version "0.3.5"
-  resolved "https://registry.yarnpkg.com/unbound/-/unbound-0.3.5.tgz#9f91cfc740b8394562b5accf23a7b5f28bfb21e2"
-  integrity sha512-vnIkZGQswi7SVEnGI+25+oN9hLA7rc40zWi+xnzEwktNIZFtAC8PB/e5FMWgFoXUC4p2Jb/ZRNsZDcv3vivH+g==
+unbound@~0.4.3:
+  version "0.4.3"
+  resolved "https://registry.yarnpkg.com/unbound/-/unbound-0.4.3.tgz#ca4e9a3c8b678df431ec576385acc8bff9aa439a"
+  integrity sha512-2ISqZLXtzp1l9f1V8Yr6S+zuhXxEwE1CjKHjXULFDHJcfhc9Gm3mn19hdPp4rlNGEdCivKYGKjYe3WRGnafYdA==
   dependencies:
-    loady "~0.0.1"
-    nan "^2.13.1"
+    loady "~0.0.5"

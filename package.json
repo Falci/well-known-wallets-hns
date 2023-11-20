@@ -3,11 +3,12 @@
   "version": "1.1.0",
   "main": "lib.js",
   "license": "MIT",
+  "type": "module",
   "author": {
     "name": "Fernando Falci",
     "url": "https://falci.me"
   },
   "dependencies": {
-    "hdns": "^0.7.0"
+    "hdns": "^0.8.0"
   }
 }

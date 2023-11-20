@@ -1,5 +1,5 @@
-const hdns = require('hdns');
-const https = require('https');
+import hdns from 'hdns';
+import https from 'https';
 
 export const init = (...hsd) => hdns.setServers(hsd);
 
