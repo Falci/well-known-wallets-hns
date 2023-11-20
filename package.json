@@ -1,6 +1,6 @@
 {
   "name": "well-known-wallets-hns",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "main": "lib.js",
   "license": "MIT",
   "type": "module",
