@@ -1,92 +1,83 @@
 const hdns = require('hdns');
 const https = require('https');
 
-const init = hsd => hdns.setServers([hsd]);
+export const init = (...hsd) => hdns.setServers(hsd);
 
 class TLSAError extends Error {
-    constructor(message = 'Invalid TLSA', code = 'EINSECURE') {
-        super(message);
-        this.code = code;
-    }
+  static E_LARGE = 'ELARGE';
+  static E_INSECURE = 'EINSECURE';
+
+  constructor(message = 'Invalid TLSA', code = E_INSECURE) {
+    super(message);
+    this.code = code;
+  }
 }
 
-const verifyTLSA = async (socket, host) => {
-    const cert = socket.getPeerCertificate(false);
+const MAX_LENGTH = 90;
+
+const verifyTLSA = async (cert, host) => {
+  try {
     const tlsa = await hdns.resolveTLSA(host, 'tcp', 443);
+    const valid = hdns.verifyTLSA(tlsa[0], cert.raw);
 
-    try {
-        const valid = hdns.verifyTLSA(tlsa[0], cert.raw);
-
-        if (!valid) {
-            throw new TLSAError();
-        }
-    } catch (e) {
-        throw new TLSAError();
-    }
+    return valid;
+  } catch (e) {
+    console.error(e);
+    return false;
+  }
 };
 
-const getAddress = (host, { dane = false, ca = !dane, token = 'HNS' } = {}) =>
-    new Promise(async (resolve, reject) => {
-        const options = {
-            rejectUnauthorized: ca,
-        };
+export async function getAddress(host) {
+  return new Promise(async (resolve, reject) => {
+    const options = {
+      rejectUnauthorized: false,
+      lookup: hdns.legacy,
+      host,
+      port: 443,
+      method: 'GET',
+      path: '/.well-known/wallets/HNS',
+      agent: false,
+    };
 
-        const req = https.get(`https://${host}/.well-known/wallets/${token}`, options, res => {
-            res.setEncoding('utf8');
-            let data = '';
-            res.on('data', chunk => (data += chunk));
-            res.on('end', async () => {
-                if (dane) {
-                    try {
-                        await verifyTLSA(res.socket, host);
-                    } catch (e) {
-                        return reject(e);
-                    }
-                }
+    const req = https.request(options, (res) => {
+      res.setEncoding('utf8');
 
-                if (res.statusCode >= 400) {
-                    const error = new Error(res.statusMessage);
-                    error.code = res.statusCode;
+      let data = '';
 
-                    return reject(error);
-                }
-                resolve(data.trim());
-            });
-        });
-
-        req.on('error', reject);
-        req.end();
-    });
-
-const dane = (host, token = 'HNS') => getAddress(host, { dane: true, ca: false, token });
-const ca = (host, token = 'HNS') => getAddress(host, { dane: false, ca: true, token });
-const caAndDane = (host, token = 'HNS') => getAddress(host, { dane: true, ca: true, token });
-
-const daneOrCa = (host, token = 'HNS') =>
-    dane(host, token).catch(error => {
-        if (error.code === 'EINSECURE') {
-            return ca(host, token);
+      res.on('data', (chunk) => {
+        const newLine = chunk.indexOf('\n');
+        if (newLine >= 0) {
+          req.destroy();
+          chunk = chunk.slice(0, newLine);
         }
-        return Promise.reject(error);
-    });
 
-const caOrDane = (host, token = 'HNS') =>
-    ca(host, token).catch(error => {
-        if (error.code === 'UNABLE_TO_VERIFY_LEAF_SIGNATURE') {
-            return dane(host, token);
+        if (data.length + chunk.length > MAX_LENGTH) {
+          if (!req.destroyed) {
+            req.destroy();
+          }
+          throw new TLSAError('response too large', TLSAError.E_LARGE);
         }
-        return Promise.reject(error);
+
+        data += chunk;
+      });
+
+      res.on('end', async () => {
+        const cert = res.socket.getPeerCertificate(false);
+        const dane = await verifyTLSA(cert, host);
+
+        if (!dane) {
+          throw new TLSAError('invalid DANE', TLSAError.E_INSECURE);
+        }
+
+        if (res.statusCode >= 400) {
+          throw new TLSAError(res.statusMessage, res.statusCode);
+        }
+
+        return resolve(data.trim());
+      });
     });
 
-const Strategy = {
-    DANE_OR_CA: daneOrCa,
-    CA_OR_DANE: caOrDane,
-    JUST_DANE: dane,
-    JUST_CA: ca,
-    CA_AND_DANE: caAndDane,
-};
-
-module.exports = {
-    init,
-    Strategy,
-};
+    req.on('error', reject);
+    req.end();
+  });
+}
